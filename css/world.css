@@ -1,0 +1,9 @@
+.world {
+  overflow: hidden;
+  position: relative;
+  background-color: snow;
+  border: 10px dashed lightseagreen;
+  border-radius: 15px;
+  max-width: 750px;
+  max-height: 800px;
+}

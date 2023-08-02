@@ -1,0 +1,9 @@
+.text {
+  --bottom: 87px;
+  position: absolute;
+  left: 150px;
+  bottom: var(--bottom);
+  border: 3px solid black;
+  padding: 10px;
+  border-radius: 15px 10px 15px 0;
+}
