@@ -8,6 +8,7 @@ const SPEED_SCALE_INCREASE = 0.00005;
 let lastTime;
 let speedScale;
 let score;
+
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const scoreElement = document.querySelector('[data-js="score"]');
 const text = document.querySelector('[data-js="text"]');
@@ -35,7 +36,6 @@ export function update(time) {
   updateObstacle(delta, speedScale);
   updateScore(delta);
   updateSpeedScale(delta);
-  console.log(speedScale);
 
   if (checkLose()) return handleLose();
   lastTime = time;
