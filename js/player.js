@@ -15,7 +15,6 @@ let yVelocity;
 
 export function setupPlayer() {
   isJumping = false;
-
   yVelocity = 0;
   player.classList.remove("player--jump");
   setCustomProperty(player, "--bottom", 10);
@@ -23,7 +22,7 @@ export function setupPlayer() {
   document.addEventListener("keydown", onJump);
 }
 
-export function updatePlayer(delta, speedScale) {
+export function updatePlayer(delta) {
   handleJump(delta);
 }
 

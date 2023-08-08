@@ -31,7 +31,6 @@ export function handleLose() {
   text.classList.remove("hide");
   const playerBottom = getCustomProperty(player, "--bottom");
   const worldHeight = getCustomProperty(world, "height");
-  console.log((worldHeight / 100) * playerBottom + 20);
   setCustomProperty(
     text,
     "--bottom",
