@@ -4,6 +4,7 @@
   background-color: snow;
   border: 10px dashed lightseagreen;
   border-radius: 15px;
-  max-width: 750px;
-  max-height: 800px;
+  padding: 20px;
+  height: 100vh;
+  width: 100%;
 }
