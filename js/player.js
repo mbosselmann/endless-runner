@@ -4,6 +4,8 @@ import {
   setCustomProperty,
 } from "./updateCustomProperty.js";
 
+import { figure } from "../setup.js";
+
 const player = document.querySelector('[data-js="player"]');
 
 const JUMP_SPEED = 0.45;
@@ -20,6 +22,7 @@ export function setupPlayer() {
   setCustomProperty(player, "--bottom", 10);
   document.removeEventListener("keydown", onJump);
   document.addEventListener("keydown", onJump);
+  player.src = figure.normal;
 }
 
 export function updatePlayer(delta) {
@@ -36,15 +39,21 @@ function onJump(event) {
 
 function handleJump(delta) {
   if (!isJumping) return;
+  player.src = figure.jumping;
   incrementCustomProperty(player, "--bottom", yVelocity * delta);
   if (getCustomProperty(player, "--bottom") <= 10) {
     setCustomProperty(player, "--bottom", 10);
     player.classList.remove("player--jump");
     isJumping = false;
+    player.src = figure.normal;
   }
   yVelocity -= GRAVITY * delta;
 }
 
 export function getPlayerRectangle() {
   return player.getBoundingClientRect();
+}
+
+export function setPlayerLose() {
+  player.src = figure.lose;
 }

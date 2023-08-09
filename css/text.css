@@ -1,7 +1,8 @@
 .text {
   --bottom: 87px;
+  --left: 200px;
   position: absolute;
-  left: 150px;
+  left: var(--left);
   bottom: var(--bottom);
   border: 3px solid black;
   padding: 10px;

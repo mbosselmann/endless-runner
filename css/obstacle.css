@@ -1,15 +1,8 @@
 .obstacle {
   position: absolute;
-  background-color: transparent;
+  background-color: tomato;
   left: calc(var(--left) * 1%);
-  height: 50px;
-  width: 80px;
+  height: 6rem;
+  width: 3rem;
   bottom: 9%;
-}
-.obstacle::after {
-  content: "🪨";
-  position: absolute;
-  font-size: 6rem;
-  bottom: -40px;
-  left: -5px;
 }

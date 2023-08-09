@@ -1,5 +1,5 @@
 import { getObstacleRectangles } from "./obstacle.js";
-import { getPlayerRectangle } from "./player.js";
+import { getPlayerRectangle, setPlayerLose } from "./player.js";
 import { handleStart } from "./runGame.js";
 import {
   getCustomProperty,
@@ -28,14 +28,21 @@ function isCollision(rectangle1, rectangle2) {
 }
 
 export function handleLose() {
+  setPlayerLose();
+
   text.classList.remove("hide");
   const playerBottom = getCustomProperty(player, "--bottom");
+  const playerLeft = getCustomProperty(player, "left");
+  const playerWidth = getCustomProperty(player, "width");
   const worldHeight = getCustomProperty(world, "height");
+
   setCustomProperty(
     text,
     "--bottom",
-    Math.floor((worldHeight / 100) * playerBottom + 80) + "px"
+    Math.floor((worldHeight / 100) * playerBottom + 120) + "px"
   );
+
+  setCustomProperty(text, "--left", playerLeft + playerWidth + 20 + "px");
   setTimeout(() => {
     document.addEventListener("keydown", handleStart, { once: true });
     startScreen.classList.remove("hide");
