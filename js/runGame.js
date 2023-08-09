@@ -8,6 +8,7 @@ const SPEED_SCALE_INCREASE = 0.00005;
 let lastTime;
 let speedScale;
 let score;
+let timeInSeconds;
 
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const scoreElement = document.querySelector('[data-js="score"]');
@@ -16,6 +17,7 @@ export function handleStart() {
   lastTime = null;
   speedScale = 1;
   score = 0;
+  timeInSeconds = undefined;
   setupGround();
   setupPlayer();
   setupObstacle();
@@ -42,9 +44,17 @@ export function update(time) {
   window.requestAnimationFrame(update);
 }
 
-function updateScore(delta) {
-  score += delta * 0.01;
-  scoreElement.textContent = Math.floor(score);
+function updateScore() {
+  const seconds = new Date().getSeconds();
+  if (timeInSeconds === undefined) {
+    return (timeInSeconds = seconds);
+  }
+  if (timeInSeconds !== seconds) {
+    timeInSeconds = seconds;
+    score += 1;
+  }
+
+  scoreElement.textContent = score;
 }
 
 function updateSpeedScale(delta) {
