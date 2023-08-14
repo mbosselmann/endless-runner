@@ -13,6 +13,7 @@ let timeInSeconds;
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const scoreElement = document.querySelector('[data-js="score"]');
 const text = document.querySelector('[data-js="text"]');
+
 export function handleStart() {
   lastTime = null;
   speedScale = 1;

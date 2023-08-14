@@ -23,6 +23,7 @@ export function setupPlayer() {
   document.removeEventListener("keydown", onJump);
   document.addEventListener("keydown", onJump);
   player.src = figure.normal;
+  handleRun();
 }
 
 export function updatePlayer(delta) {
@@ -56,4 +57,27 @@ export function getPlayerRectangle() {
 
 export function setPlayerLose() {
   player.src = figure.lose;
+}
+
+function handleRun() {
+  if (player.src === figure.lose) return;
+
+  const playerInterval = setInterval(() => {
+    if (player.src === figure.lose) return clearInterval(playerInterval);
+
+    if (isJumping) {
+      console.log(player.src);
+      player.src = figure.jumping;
+      return;
+    }
+    if (player.src === figure.normal) {
+      console.log(player.src);
+      player.src = figure.run;
+      return;
+    }
+    if (player.src === figure.run) {
+      player.src = figure.normal;
+      return;
+    }
+  }, 200);
 }
