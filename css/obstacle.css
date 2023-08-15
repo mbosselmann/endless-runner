@@ -2,7 +2,7 @@
   position: absolute;
   background-color: tomato;
   left: calc(var(--left) * 1%);
-  height: 6rem;
+  height: 5rem;
   width: 3rem;
   bottom: 9%;
 }
