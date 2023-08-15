@@ -46,13 +46,12 @@ export function update(time) {
 }
 
 function updateScore() {
-  const seconds = new Date().getSeconds();
+  const seconds = new Date().getTime();
   if (timeInSeconds === undefined) {
     return (timeInSeconds = seconds);
   }
   if (timeInSeconds !== seconds) {
-    timeInSeconds = seconds;
-    score += 1;
+    score = Math.floor((seconds - timeInSeconds) / 1000);
   }
 
   scoreElement.textContent = score;
