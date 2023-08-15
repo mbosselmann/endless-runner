@@ -15,6 +15,8 @@ let isJumping;
 
 let yVelocity;
 
+let intervalID;
+
 export function setupPlayer() {
   isJumping = false;
   yVelocity = 0;
@@ -23,7 +25,7 @@ export function setupPlayer() {
   document.removeEventListener("keydown", onJump);
   document.addEventListener("keydown", onJump);
   player.src = figure.normal;
-  handleRun();
+  onRun();
 }
 
 export function updatePlayer(delta) {
@@ -59,25 +61,30 @@ export function setPlayerLose() {
   player.src = figure.lose;
 }
 
-function handleRun() {
+function onRun() {
   if (player.src === figure.lose) return;
 
-  const playerInterval = setInterval(() => {
-    if (player.src === figure.lose) return clearInterval(playerInterval);
+  intervalID = setInterval(handleRun, 200);
+}
 
-    if (isJumping) {
-      console.log(player.src);
-      player.src = figure.jumping;
-      return;
-    }
-    if (player.src === figure.normal) {
-      console.log(player.src);
-      player.src = figure.run;
-      return;
-    }
-    if (player.src === figure.run) {
-      player.src = figure.normal;
-      return;
-    }
-  }, 200);
+function handleRun() {
+  if (player.src === figure.lose) {
+    clearInterval(intervalID);
+    return;
+  }
+
+  if (isJumping) {
+    console.log(player.src);
+    player.src = figure.jumping;
+    return;
+  }
+  if (player.src === figure.normal) {
+    console.log(player.src);
+    player.src = figure.run;
+    return;
+  }
+  if (player.src === figure.run) {
+    player.src = figure.normal;
+    return;
+  }
 }
