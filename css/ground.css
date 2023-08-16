@@ -1,13 +1,10 @@
 .ground {
-  background-color: MediumAquamarine;
-  height: 10%;
+  background-image: linear-gradient(to right, transparent, white);
+  height: 30px;
   --left: 0;
   position: absolute;
   width: 300%;
   bottom: 0;
   left: calc(var(--left) * 1%);
-}
-
-.ground-two {
-  background-color: LightSeaGreen;
+  background: repeat-x url(../assets/ground_grass.png);
 }

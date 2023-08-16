@@ -1,4 +1,7 @@
 .start-screen {
+  background-color: snow;
+  border-radius: 15px;
+  padding: 1rem 1rem 0.7rem;
   position: absolute;
   font-size: 2rem;
   top: 20%;

@@ -1,10 +1,13 @@
 .world {
   overflow: hidden;
   position: relative;
-  background-color: snow;
-  border: 10px dashed lightseagreen;
+  background-color: lightskyblue;
   border-radius: 15px;
   padding: 20px;
   height: 100vh;
+  max-height: 700px;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 30px;
+  box-shadow: 0 0 20px lightskyblue;
 }

@@ -17,11 +17,13 @@ let yVelocity;
 
 let intervalID;
 
+let playerBottom = 1;
+
 export function setupPlayer() {
   isJumping = false;
   yVelocity = 0;
   player.classList.remove("player--jump");
-  setCustomProperty(player, "--bottom", 10);
+  setCustomProperty(player, "--bottom", playerBottom);
   document.removeEventListener("keydown", onJump);
   document.addEventListener("keydown", onJump);
   player.src = figure.normal;
@@ -44,8 +46,8 @@ function handleJump(delta) {
   if (!isJumping) return;
   player.src = figure.jumping;
   incrementCustomProperty(player, "--bottom", yVelocity * delta);
-  if (getCustomProperty(player, "--bottom") <= 10) {
-    setCustomProperty(player, "--bottom", 10);
+  if (getCustomProperty(player, "--bottom") <= playerBottom) {
+    setCustomProperty(player, "--bottom", playerBottom);
     player.classList.remove("player--jump");
     isJumping = false;
     player.src = figure.normal;
@@ -62,28 +64,29 @@ export function setPlayerLose() {
 }
 
 function onRun() {
-  if (player.src === figure.lose) return;
+  if (player.src.includes(figure.lose)) return;
 
   intervalID = setInterval(handleRun, 200);
 }
 
 function handleRun() {
-  if (player.src === figure.lose) {
+  if (player.src.includes(figure.lose)) {
     clearInterval(intervalID);
     return;
   }
 
   if (isJumping) {
     console.log(player.src);
+    console.log(figure.normal);
     player.src = figure.jumping;
     return;
   }
-  if (player.src === figure.normal) {
+  if (player.src.includes(figure.normal)) {
     console.log(player.src);
     player.src = figure.run;
     return;
   }
-  if (player.src === figure.run) {
+  if (player.src.includes(figure.run)) {
     player.src = figure.normal;
     return;
   }

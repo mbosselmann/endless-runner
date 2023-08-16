@@ -1,12 +1,9 @@
 .player {
-  height: 6rem;
-  width: 6rem;
   background-color: transparent;
-  --bottom: 10;
+  --bottom: 1;
   position: absolute;
   left: 100px;
   bottom: calc(var(--bottom) * 1%);
-  rotate: y 180deg;
 }
 
 .player--jump {

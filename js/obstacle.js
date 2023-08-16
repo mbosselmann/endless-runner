@@ -43,9 +43,10 @@ export function updateObstacle(delta, speedScale) {
 }
 
 function createObstacle() {
-  const obstacle = document.createElement("span");
+  const obstacle = document.createElement("img");
   obstacle.dataset.js = "obstacle";
   obstacle.classList.add("obstacle");
+  obstacle.src = "./assets/rock.png";
   setCustomProperty(obstacle, "--left", 100);
   world.append(obstacle);
 }

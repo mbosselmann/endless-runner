@@ -1,8 +1,6 @@
 .obstacle {
   position: absolute;
-  background-color: tomato;
   left: calc(var(--left) * 1%);
-  height: 5rem;
-  width: 3rem;
-  bottom: 9%;
+  width: 5rem;
+  bottom: 2%;
 }
