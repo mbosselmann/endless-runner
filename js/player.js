@@ -59,7 +59,7 @@ function onJump(event) {
   if (event.code !== "Space" || isJumping) return;
   yVelocity = JUMP_SPEED;
   isJumping = true;
-  player.classList.add("player--jump");
+  if (figure.rotate) player.classList.add("player--jump");
 }
 
 function handleJump(delta) {
@@ -67,7 +67,7 @@ function handleJump(delta) {
   incrementCustomProperty(player, "--bottom", yVelocity * delta);
   if (getCustomProperty(player, "--bottom") <= playerBottom) {
     setCustomProperty(player, "--bottom", playerBottom);
-    player.classList.remove("player--jump");
+    if (figure.rotate) player.classList.remove("player--jump");
     isJumping = false;
     document.querySelector('[data-js="player"]').remove();
     player.append(figureRun1);

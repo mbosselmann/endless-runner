@@ -3,6 +3,7 @@ export const figure = {
   run: "/assets/gw_2.png",
   jumping: "/assets/gj.png",
   lose: "/assets/gh.png",
+  rotate: false,
 };
 
 // ideas:
