@@ -6,7 +6,7 @@ import {
 
 import { figure } from "../setup.js";
 
-const player = document.querySelector('[data-js="player"]');
+const player = document.querySelector('[data-js="image-container"]');
 
 const JUMP_SPEED = 0.45;
 const GRAVITY = 0.0015;
@@ -19,14 +19,35 @@ let intervalID;
 
 let playerBottom = 1;
 
+const figureRun1 = new Image();
+figureRun1.src = figure.normal;
+figureRun1.dataset.js = "player";
+figureRun1.alt = "avatar";
+
+const figureRun2 = new Image();
+figureRun2.src = figure.run;
+figureRun2.dataset.js = "player";
+figureRun2.alt = "avatar";
+
+const figureJump = new Image();
+figureJump.src = figure.jumping;
+figureJump.dataset.js = "player";
+figureJump.alt = "avatar";
+
+const figureLose = new Image();
+figureLose.src = figure.lose;
+figureLose.dataset.js = "player";
+figureLose.alt = "avatar";
+
 export function setupPlayer() {
+  document.querySelector('[data-js="player"]').remove();
   isJumping = false;
   yVelocity = 0;
   player.classList.remove("player--jump");
   setCustomProperty(player, "--bottom", playerBottom);
   document.removeEventListener("keydown", onJump);
   document.addEventListener("keydown", onJump);
-  player.src = figure.normal;
+  player.append(figureRun1);
   onRun();
 }
 
@@ -39,18 +60,17 @@ function onJump(event) {
   yVelocity = JUMP_SPEED;
   isJumping = true;
   player.classList.add("player--jump");
-  console.log("JUMP!");
 }
 
 function handleJump(delta) {
   if (!isJumping) return;
-  player.src = figure.jumping;
   incrementCustomProperty(player, "--bottom", yVelocity * delta);
   if (getCustomProperty(player, "--bottom") <= playerBottom) {
     setCustomProperty(player, "--bottom", playerBottom);
     player.classList.remove("player--jump");
     isJumping = false;
-    player.src = figure.normal;
+    document.querySelector('[data-js="player"]').remove();
+    player.append(figureRun1);
   }
   yVelocity -= GRAVITY * delta;
 }
@@ -60,34 +80,40 @@ export function getPlayerRectangle() {
 }
 
 export function setPlayerLose() {
-  player.src = figure.lose;
+  document.querySelector('[data-js="player"]').remove();
+  player.append(figureLose);
 }
 
 function onRun() {
-  if (player.src.includes(figure.lose)) return;
+  const playerFigure = document.querySelector('[data-js="player"]');
+
+  if (playerFigure.src.includes(figure.lose)) return;
 
   intervalID = setInterval(handleRun, 200);
 }
 
 function handleRun() {
-  if (player.src.includes(figure.lose)) {
+  const playerFigure = document.querySelector('[data-js="player"]');
+
+  if (playerFigure.src.includes(figure.lose)) {
     clearInterval(intervalID);
     return;
   }
 
   if (isJumping) {
-    console.log(player.src);
-    console.log(figure.normal);
-    player.src = figure.jumping;
+    document.querySelector('[data-js="player"]').remove();
+    player.append(figureJump);
     return;
   }
-  if (player.src.includes(figure.normal)) {
-    console.log(player.src);
-    player.src = figure.run;
+  if (playerFigure.src.includes(figure.normal)) {
+    document.querySelector('[data-js="player"]').remove();
+    player.append(figureRun2);
     return;
   }
-  if (player.src.includes(figure.run)) {
-    player.src = figure.normal;
+  if (playerFigure.src.includes(figure.run)) {
+    document.querySelector('[data-js="player"]').remove();
+    player.append(figureRun1);
+
     return;
   }
 }
