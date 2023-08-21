@@ -13,8 +13,16 @@ const world = document.querySelector('[data-js="world"]');
 
 export function checkLose() {
   const playerRectangle = getPlayerRectangle();
+
+  const smallerBoundingBox = {
+    top: playerRectangle.top,
+    bottom: playerRectangle.bottom,
+    left: playerRectangle.left + 20,
+    right: playerRectangle.right - 20,
+  };
+
   return getObstacleRectangles().some((rectangle) =>
-    isCollision(rectangle, playerRectangle)
+    isCollision(rectangle, smallerBoundingBox)
   );
 }
 
