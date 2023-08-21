@@ -5,8 +5,8 @@ import {
 } from "./updateCustomProperty.js";
 
 const SPEED = 0.05;
-const OBSTACLE_INTERVAL_MIN = 500;
-const OBSTACLE_INTERVAL_MAX = 2000;
+const OBSTACLE_INTERVAL_MIN = 1000;
+const OBSTACLE_INTERVAL_MAX = 2500;
 
 const world = document.querySelector('[data-js="world"]');
 
