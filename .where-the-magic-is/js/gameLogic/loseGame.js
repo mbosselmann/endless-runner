@@ -1,6 +1,5 @@
-import { getObstacleRectangles } from "../gameObjects/obstacle.js";
-import { getPlayerRectangle, setPlayerLose } from "../gameObjects/player.js";
-import { handleStart } from "./runGame.js";
+import { setPlayerLose } from "../gameObjects/player.js";
+import { handleStart } from "./handleStart.js";
 import {
   getCustomProperty,
   setCustomProperty,
@@ -9,30 +8,6 @@ import {
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const text = document.querySelector('[data-js="text"]');
 const world = document.querySelector('[data-js="world"]');
-
-export function checkLose() {
-  const playerRectangle = getPlayerRectangle();
-
-  const smallerBoundingBox = {
-    top: playerRectangle.top,
-    bottom: playerRectangle.bottom,
-    left: playerRectangle.left + 20,
-    right: playerRectangle.right - 20,
-  };
-
-  return getObstacleRectangles().some((rectangle) =>
-    isCollision(rectangle, smallerBoundingBox)
-  );
-}
-
-function isCollision(rectangle1, rectangle2) {
-  return (
-    rectangle1.left < rectangle2.right &&
-    rectangle1.right > rectangle2.left &&
-    rectangle1.top < rectangle2.bottom &&
-    rectangle1.bottom > rectangle2.top
-  );
-}
 
 export function handleLose() {
   text.classList.remove("hide");
