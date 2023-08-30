@@ -8,6 +8,5 @@
   padding: 10px;
   border-radius: 15px 10px 15px 0;
   background-color: var(--bg-color);
-  color: var(--color);
   filter: brightness(var(--brightness));
 }

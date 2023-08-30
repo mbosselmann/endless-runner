@@ -8,6 +8,7 @@
   max-width: 1000px;
   box-shadow: 0 0 20px var(--sky);
   filter: grayscale(var(--grayscale));
+  color: var(--color);
 }
 
 @media (min-width: 1000px) {
