@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+:root {
+  --sky: lightskyblue;
+  --bg-color: snow;
+  --color: black;
+  --brightness: 100%;
+  --grayscale: 0;
+  --contrast: 100%;
+}
+
+.night {
+  --sky: #1b4f72;
+  --bg-color: #1b2631;
+  --color: snow;
+  --brightness: 80%;
+}
+
+.bw {
+  --bg-color: black;
+  --sky: #1b4f72;
+  --grayscale: 1;
+  --brightness: 120%;
+  --contrast: 200%;
+  --color: snow;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  filter: grayscale(var(--grayscale));
+}
+
+.hide {
+  display: none;
+}
