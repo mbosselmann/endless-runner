@@ -24,7 +24,6 @@ async function getCustomColors() {
 
 export async function setupGame() {
   const theme = await getTheme();
-
   if (theme) {
     document.body.classList.add(theme);
   }
@@ -33,7 +32,9 @@ export async function setupGame() {
 
   if (!customColors) return;
 
-  document.body.classList.remove(theme);
+  if (theme) {
+    document.body.classList.remove(theme);
+  }
 
   const { textColor, textBackgroundColor, skyColor, gameBackgroundColor } =
     customColors;

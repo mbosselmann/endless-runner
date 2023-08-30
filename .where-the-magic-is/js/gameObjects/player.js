@@ -4,7 +4,23 @@ import {
   setCustomProperty,
 } from "../helper/updateCustomProperty.js";
 
-import { figure } from "../../../setup.js";
+// {
+//   normal: "/assets/gw_1.png",
+//   run: "/assets/gw_2.png",
+//   jumping: "/assets/gj.png",
+//   lose: "/assets/gh.png",
+//   rotate: false,
+// }
+
+async function getFigure() {
+  try {
+    const module = await import("../../../setup.js");
+    return module.figure;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+}
 
 const player = document.querySelector('[data-js="image-container"]');
 
@@ -19,36 +35,54 @@ let intervalID;
 
 let playerBottom = 1;
 
-const figureRun1 = new Image();
-figureRun1.src = figure.normal;
-figureRun1.dataset.js = "player";
-figureRun1.alt = "avatar";
+async function createPlayerFigures() {
+  const figure = await getFigure();
+  if (!figure) return null;
 
-const figureRun2 = new Image();
-figureRun2.src = figure.run;
-figureRun2.dataset.js = "player";
-figureRun2.alt = "avatar";
+  const figureRun1 = new Image();
+  figureRun1.src = figure.normal;
+  figureRun1.dataset.js = "player";
+  figureRun1.alt = "avatar";
 
-const figureJump = new Image();
-figureJump.src = figure.jumping;
-figureJump.dataset.js = "player";
-figureJump.alt = "avatar";
+  const figureRun2 = new Image();
+  figureRun2.src = figure.run;
+  figureRun2.dataset.js = "player";
+  figureRun2.alt = "avatar";
 
-const figureLose = new Image();
-figureLose.src = figure.lose;
-figureLose.dataset.js = "player";
-figureLose.alt = "avatar";
+  const figureJump = new Image();
+  figureJump.src = figure.jumping;
+  figureJump.dataset.js = "player";
+  figureJump.alt = "avatar";
+
+  const figureLose = new Image();
+  figureLose.src = figure.lose;
+  figureLose.dataset.js = "player";
+  figureLose.alt = "avatar";
+
+  return {
+    figureRun1,
+    figureRun2,
+    figureJump,
+    figureLose,
+    rotate: figure.rotate,
+  };
+}
+
+const figure = await createPlayerFigures();
 
 export function setupPlayer() {
-  document.querySelector('[data-js="player"]').remove();
   isJumping = false;
   yVelocity = 0;
-  player.classList.remove("player--jump");
+
+  if (figure) {
+    document.querySelector('[data-js="player"]').remove();
+    player.classList.remove("player--jump");
+    player.append(figureRun1);
+    onRun();
+  }
   setCustomProperty(player, "--bottom", playerBottom);
   document.removeEventListener("keydown", onJump);
   document.addEventListener("keydown", onJump);
-  player.append(figureRun1);
-  onRun();
 }
 
 export function updatePlayer(delta) {
@@ -59,7 +93,7 @@ function onJump(event) {
   if (event.code !== "Space" || isJumping) return;
   yVelocity = JUMP_SPEED;
   isJumping = true;
-  if (figure.rotate) player.classList.add("player--jump");
+  if (figure && figure.rotate) player.classList.add("player--jump");
 }
 
 function handleJump(delta) {
@@ -67,10 +101,12 @@ function handleJump(delta) {
   incrementCustomProperty(player, "--bottom", yVelocity * delta);
   if (getCustomProperty(player, "--bottom") <= playerBottom) {
     setCustomProperty(player, "--bottom", playerBottom);
-    if (figure.rotate) player.classList.remove("player--jump");
     isJumping = false;
-    document.querySelector('[data-js="player"]').remove();
-    player.append(figureRun1);
+    if (figure && figure.rotate) {
+      player.classList.remove("player--jump");
+      document.querySelector('[data-js="player"]').remove();
+      player.append(figureRun1);
+    }
   }
   yVelocity -= GRAVITY * delta;
 }
@@ -80,6 +116,8 @@ export function getPlayerRectangle() {
 }
 
 export function setPlayerLose() {
+  if (!figure) return;
+
   document.querySelector('[data-js="player"]').remove();
   player.append(figureLose);
 }
@@ -94,6 +132,8 @@ function onRun() {
 
 function handleRun() {
   const playerFigure = document.querySelector('[data-js="player"]');
+
+  if (!figure) return;
 
   if (playerFigure.src.includes(figure.lose)) {
     clearInterval(intervalID);

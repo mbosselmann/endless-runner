@@ -21,7 +21,6 @@ export function setupObstacle() {
 }
 
 export function updateObstacle(delta) {
-  console.log(speedScale);
   document.querySelectorAll('[data-js="obstacle"]').forEach((obstacle) => {
     incrementCustomProperty(
       obstacle,
