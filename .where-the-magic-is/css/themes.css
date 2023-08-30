@@ -1,0 +1,15 @@
+.night {
+  --sky: #1b4f72;
+  --bg-color: #1b2631;
+  --color: snow;
+  --brightness: 80%;
+}
+
+.bw {
+  --bg-color: black;
+  --sky: #1b4f72;
+  --grayscale: 1;
+  --brightness: 120%;
+  --contrast: 200%;
+  --color: snow;
+}

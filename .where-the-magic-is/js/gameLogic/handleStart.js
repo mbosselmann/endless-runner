@@ -4,9 +4,14 @@ import { setupSpeedScale } from "./speedScale.js";
 import { updateGame, setupLastTime } from "./updateGame.js";
 import { setupGround } from "../gameObjects/ground.js";
 import { setupObstacle } from "../gameObjects/obstacle.js";
+import { theme } from "../../../setup.js";
 
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const text = document.querySelector('[data-js="text"]');
+
+if (theme) {
+  document.body.classList.add(theme);
+}
 
 export function handleStart() {
   setupLastTime();

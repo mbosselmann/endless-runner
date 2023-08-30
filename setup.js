@@ -6,7 +6,7 @@ export const figure = {
   rotate: false,
 };
 
-// updateTheme("night");
+export const theme = "night";
 
 // which text is displayed if you lose? -> change in HTML!?
 
