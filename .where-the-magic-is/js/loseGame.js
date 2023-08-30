@@ -1,5 +1,5 @@
-import { getObstacleRectangles } from "./obstacle.js";
-import { getPlayerRectangle, setPlayerLose } from "./player.js";
+import { getObstacleRectangles } from "./gameObjects/obstacle.js";
+import { getPlayerRectangle, setPlayerLose } from "./gameObjects/player.js";
 import { handleStart } from "./runGame.js";
 import {
   getCustomProperty,

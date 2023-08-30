@@ -1,6 +1,6 @@
-import { setupGround, updateGround } from "./ground.js";
-import { setupObstacle, updateObstacle } from "./obstacle.js";
-import { setupPlayer, updatePlayer } from "./player.js";
+import { setupGround, updateGround } from "./gameObjects/ground.js";
+import { setupObstacle, updateObstacle } from "./gameObjects/obstacle.js";
+import { setupPlayer, updatePlayer } from "./gameObjects/player.js";
 import { checkLose, handleLose } from "./loseGame.js";
 
 const SPEED_SCALE_INCREASE = 0.00005;
