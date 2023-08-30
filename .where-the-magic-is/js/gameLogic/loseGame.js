@@ -1,10 +1,10 @@
-import { getObstacleRectangles } from "./gameObjects/obstacle.js";
-import { getPlayerRectangle, setPlayerLose } from "./gameObjects/player.js";
+import { getObstacleRectangles } from "../gameObjects/obstacle.js";
+import { getPlayerRectangle, setPlayerLose } from "../gameObjects/player.js";
 import { handleStart } from "./runGame.js";
 import {
   getCustomProperty,
   setCustomProperty,
-} from "./updateCustomProperty.js";
+} from "../helper/updateCustomProperty.js";
 
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const text = document.querySelector('[data-js="text"]');

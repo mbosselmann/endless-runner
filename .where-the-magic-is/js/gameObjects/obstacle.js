@@ -2,7 +2,7 @@ import {
   incrementCustomProperty,
   setCustomProperty,
   getCustomProperty,
-} from "../updateCustomProperty.js";
+} from "../helper/updateCustomProperty.js";
 
 const SPEED = 0.05;
 const OBSTACLE_INTERVAL_MIN = 1000;

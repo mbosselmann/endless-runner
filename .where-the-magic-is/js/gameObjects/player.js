@@ -2,7 +2,7 @@ import {
   getCustomProperty,
   incrementCustomProperty,
   setCustomProperty,
-} from "../updateCustomProperty.js";
+} from "../helper/updateCustomProperty.js";
 
 import { figure } from "../../../setup.js";
 
