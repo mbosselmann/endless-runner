@@ -3,7 +3,7 @@ import {
   setCustomProperty,
   getCustomProperty,
 } from "../helper/updateCustomProperty.js";
-import { speedScale } from "../gameLogic/updateSpeedScale.js";
+import { speedScale } from "../gameLogic/speedScale.js";
 
 const SPEED = 0.05;
 const grounds = document.querySelectorAll('[data-js="ground"]');

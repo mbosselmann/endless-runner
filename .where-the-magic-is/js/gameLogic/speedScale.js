@@ -8,5 +8,4 @@ export function setupSpeedScale() {
 
 export function updateSpeedScale(delta) {
   speedScale += delta * SPEED_SCALE_INCREASE;
-  console.log(speedScale);
 }
