@@ -3,6 +3,7 @@ import {
   setCustomProperty,
   getCustomProperty,
 } from "../helper/updateCustomProperty.js";
+import { speedScale } from "../gameLogic/updateSpeedScale.js";
 
 const SPEED = 0.05;
 const OBSTACLE_INTERVAL_MIN = 1000;
@@ -19,7 +20,8 @@ export function setupObstacle() {
   });
 }
 
-export function updateObstacle(delta, speedScale) {
+export function updateObstacle(delta) {
+  console.log(speedScale);
   document.querySelectorAll('[data-js="obstacle"]').forEach((obstacle) => {
     incrementCustomProperty(
       obstacle,

@@ -3,17 +3,16 @@ import { setupObstacle, updateObstacle } from "../gameObjects/obstacle.js";
 import { setupPlayer, updatePlayer } from "../gameObjects/player.js";
 import { checkLose, handleLose } from "./loseGame.js";
 import { updateScore, setupScore } from "./score.js";
-import { updateSpeedScale } from "./updateSpeedScale.js";
+import { setupSpeedScale, updateSpeedScale } from "./updateSpeedScale.js";
 
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const text = document.querySelector('[data-js="text"]');
 
 let lastTime;
-let speedScale;
 
 export function handleStart() {
   lastTime = null;
-  speedScale = 1;
+  setupSpeedScale();
   setupGround();
   setupPlayer();
   setupObstacle();
@@ -30,11 +29,11 @@ export function update(time) {
     return;
   }
   const delta = time - lastTime;
-  updateGround(delta, speedScale);
+  updateGround(delta);
   updatePlayer(delta);
-  updateObstacle(delta, speedScale);
+  updateObstacle(delta);
   updateScore();
-  // updateSpeedScale(delta, speedScale);
+  updateSpeedScale(delta);
 
   if (checkLose()) return handleLose();
   lastTime = time;
