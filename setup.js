@@ -6,12 +6,14 @@ export const figure = {
   rotate: false,
 };
 
+// updateTheme("night");
+
+// which text is displayed if you lose? -> change in HTML!?
+
 // ideas:
 // decide about obstacles?
-// decide about text that is displayed if you lose?
 // decide about grounds?
 // custom colors?
 // decide for a color theme? light & dark? or just one?
 // change speedrate?
 // change jump height?
-// deactivate rotation if you want?

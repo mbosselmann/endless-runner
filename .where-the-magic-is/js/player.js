@@ -4,7 +4,7 @@ import {
   setCustomProperty,
 } from "./updateCustomProperty.js";
 
-import { figure } from "../setup.js";
+import { figure } from "../../setup.js";
 
 const player = document.querySelector('[data-js="image-container"]');
 

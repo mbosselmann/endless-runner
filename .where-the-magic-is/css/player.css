@@ -1,13 +1,13 @@
 .player {
-  background-color: transparent;
   --bottom: 1;
   position: absolute;
   left: 100px;
   bottom: calc(var(--bottom) * 1%);
+  filter: brightness(var(--brightness)) grayscale(var(--grayscale));
 }
 
 .player--jump {
-  animation: rotate 500ms linear reverse;
+  animation: rotate 500ms linear;
 }
 
 @keyframes rotate {

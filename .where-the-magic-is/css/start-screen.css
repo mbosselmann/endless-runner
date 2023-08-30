@@ -1,5 +1,5 @@
 .start-screen {
-  background-color: snow;
+  background-color: var(--bg-color);
   border-radius: 15px;
   padding: 1rem 1rem 0.7rem;
   position: absolute;
@@ -7,4 +7,5 @@
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: var(--color);
 }
