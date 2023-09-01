@@ -1,26 +1,9 @@
+import { getSetupModule } from "../helper/getSetupModule.js";
 import {
   getCustomProperty,
   incrementCustomProperty,
   setCustomProperty,
 } from "../helper/updateCustomProperty.js";
-
-// {
-//   normal: "/assets/gw_1.png",
-//   run: "/assets/gw_2.png",
-//   jumping: "/assets/gj.png",
-//   lose: "/assets/gh.png",
-//   rotate: false,
-// }
-
-async function getFigure() {
-  try {
-    const module = await import("../../../setup.js");
-    return module.figure;
-  } catch (error) {
-    console.log(error.message);
-    return null;
-  }
-}
 
 const player = document.querySelector('[data-js="image-container"]');
 
@@ -28,16 +11,31 @@ const JUMP_SPEED = 0.45;
 const GRAVITY = 0.0015;
 
 let isJumping;
-
 let yVelocity;
-
 let intervalID;
-
 let playerBottom = 1;
 
-async function createPlayerFigures() {
-  const figure = await getFigure();
-  if (!figure) return null;
+const { figure } = await getSetupModule();
+const { figureRun1, figureRun2, figureJump, figureLose } =
+  await createPlayerFigures(figure);
+
+export async function setupPlayer() {
+  isJumping = false;
+  yVelocity = 0;
+
+  if (figure) {
+    document.querySelector('[data-js="player"]').remove();
+    player.classList.remove("player--jump");
+    player.append(figureRun1);
+    onRun();
+  }
+  setCustomProperty(player, "--bottom", playerBottom);
+  document.removeEventListener("keydown", onJump);
+  document.addEventListener("keydown", onJump);
+}
+
+async function createPlayerFigures(figure) {
+  if (!figure) return {};
 
   const figureRun1 = new Image();
   figureRun1.src = figure.normal;
@@ -64,25 +62,7 @@ async function createPlayerFigures() {
     figureRun2,
     figureJump,
     figureLose,
-    rotate: figure.rotate,
   };
-}
-
-const figure = await createPlayerFigures();
-
-export function setupPlayer() {
-  isJumping = false;
-  yVelocity = 0;
-
-  if (figure) {
-    document.querySelector('[data-js="player"]').remove();
-    player.classList.remove("player--jump");
-    player.append(figureRun1);
-    onRun();
-  }
-  setCustomProperty(player, "--bottom", playerBottom);
-  document.removeEventListener("keydown", onJump);
-  document.addEventListener("keydown", onJump);
 }
 
 export function updatePlayer(delta) {
@@ -96,32 +76,6 @@ function onJump(event) {
   if (figure && figure.rotate) player.classList.add("player--jump");
 }
 
-function handleJump(delta) {
-  if (!isJumping) return;
-  incrementCustomProperty(player, "--bottom", yVelocity * delta);
-  if (getCustomProperty(player, "--bottom") <= playerBottom) {
-    setCustomProperty(player, "--bottom", playerBottom);
-    isJumping = false;
-    if (figure && figure.rotate) {
-      player.classList.remove("player--jump");
-      document.querySelector('[data-js="player"]').remove();
-      player.append(figureRun1);
-    }
-  }
-  yVelocity -= GRAVITY * delta;
-}
-
-export function getPlayerRectangle() {
-  return player.getBoundingClientRect();
-}
-
-export function setPlayerLose() {
-  if (!figure) return;
-
-  document.querySelector('[data-js="player"]').remove();
-  player.append(figureLose);
-}
-
 function onRun() {
   const playerFigure = document.querySelector('[data-js="player"]');
 
@@ -130,7 +84,7 @@ function onRun() {
   intervalID = setInterval(handleRun, 200);
 }
 
-function handleRun() {
+async function handleRun() {
   const playerFigure = document.querySelector('[data-js="player"]');
 
   if (!figure) return;
@@ -156,4 +110,30 @@ function handleRun() {
 
     return;
   }
+}
+
+function handleJump(delta) {
+  if (!isJumping) return;
+  incrementCustomProperty(player, "--bottom", yVelocity * delta);
+  if (getCustomProperty(player, "--bottom") <= playerBottom) {
+    setCustomProperty(player, "--bottom", playerBottom);
+    isJumping = false;
+    if (figure && figure.rotate) {
+      player.classList.remove("player--jump");
+      document.querySelector('[data-js="player"]').remove();
+      player.append(figureRun1);
+    }
+  }
+  yVelocity -= figure.jumpToTheMoon ? 0.0005 * delta : GRAVITY * delta;
+}
+
+export function getPlayerRectangle() {
+  return player.getBoundingClientRect();
+}
+
+export function setPlayerLose() {
+  if (!figure) return;
+
+  document.querySelector('[data-js="player"]').remove();
+  player.append(figureLose);
 }

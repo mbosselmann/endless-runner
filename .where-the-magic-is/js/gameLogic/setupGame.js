@@ -1,57 +1,45 @@
 import { setCustomProperty } from "../helper/updateCustomProperty.js";
+import { getSetupModule } from "../helper/getSetupModule.js";
 
 const world = document.querySelector('[data-js="world"]');
 
-async function getTheme() {
-  try {
-    const module = await import("../../../setup.js");
-    return module.theme;
-  } catch (error) {
-    console.log(error.message);
-    return "";
-  }
-}
-
-async function getCustomColors() {
-  try {
-    const module = await import("../../../setup.js");
-    return module.customColors;
-  } catch (error) {
-    console.log(error.message);
-    return null;
-  }
-}
+// async function getCustomColors() {
+//   try {
+//     const module = await import("../../../setup.js");
+//     return module.customColors;
+//   } catch (error) {
+//     console.log(error.message);
+//     return null;
+//   }
+// }
 
 export async function setupGame() {
-  const theme = await getTheme();
-  if (theme) {
-    document.body.classList.add(theme);
+  const setupModule = await getSetupModule();
+
+  if (!setupModule) return;
+
+  if (setupModule.theme && !setupModule.customColors) {
+    document.body.classList.add(setupModule.theme);
   }
 
-  const customColors = await getCustomColors();
+  if (setupModule.customColors) {
+    const { textColor, textBackgroundColor, skyColor, gameBackgroundColor } =
+      setupModule.customColors;
 
-  if (!customColors) return;
+    if (skyColor) {
+      setCustomProperty(world, "--sky", skyColor);
+    }
 
-  if (theme) {
-    document.body.classList.remove(theme);
-  }
+    if (textColor) {
+      setCustomProperty(world, "--color", textColor);
+    }
 
-  const { textColor, textBackgroundColor, skyColor, gameBackgroundColor } =
-    customColors;
+    if (textBackgroundColor) {
+      setCustomProperty(world, "--bg-color", textBackgroundColor);
+    }
 
-  if (skyColor) {
-    setCustomProperty(world, "--sky", customColors.skyColor);
-  }
-
-  if (textColor) {
-    setCustomProperty(world, "--color", customColors.textColor);
-  }
-
-  if (textBackgroundColor) {
-    setCustomProperty(world, "--bg-color", customColors.textBackgroundColor);
-  }
-
-  if (gameBackgroundColor) {
-    setCustomProperty(document.body, "background-color", gameBackgroundColor);
+    if (gameBackgroundColor) {
+      setCustomProperty(document.body, "background-color", gameBackgroundColor);
+    }
   }
 }
