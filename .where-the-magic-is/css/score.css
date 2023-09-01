@@ -1,6 +1,9 @@
 .score {
   position: absolute;
-  font-size: 2rem;
+  margin: 0;
+  text-align: center;
+  min-width: 18rem;
+  font-size: 1.2rem;
   right: 1rem;
   top: 1rem;
   background-color: var(--bg-color);
