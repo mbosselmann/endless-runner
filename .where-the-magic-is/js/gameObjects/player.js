@@ -124,7 +124,8 @@ function handleJump(delta) {
       player.append(figureRun1);
     }
   }
-  yVelocity -= figure.jumpToTheMoon ? 0.0005 * delta : GRAVITY * delta;
+  yVelocity -=
+    figure && figure.jumpToTheMoon ? 0.0005 * delta : GRAVITY * delta;
 }
 
 export function getPlayerRectangle() {
