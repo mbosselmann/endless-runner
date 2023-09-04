@@ -3,16 +3,6 @@ import { getSetupModule } from "../helper/getSetupModule.js";
 
 const world = document.querySelector('[data-js="world"]');
 
-// async function getCustomColors() {
-//   try {
-//     const module = await import("../../../setup.js");
-//     return module.customColors;
-//   } catch (error) {
-//     console.log(error.message);
-//     return null;
-//   }
-// }
-
 export async function setupGame() {
   const setupModule = await getSetupModule();
 
