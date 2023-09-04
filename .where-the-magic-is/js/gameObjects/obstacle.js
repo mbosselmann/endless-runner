@@ -25,7 +25,6 @@ export function setupObstacle() {
     obstacleImageSrc = obstacle.src;
     initializeObstacleImage();
   }
-  console.log(initialObstacle);
   document.querySelectorAll('[data-js="obstacle"]').forEach((obstacle) => {
     obstacle.remove();
   });
