@@ -38,12 +38,12 @@ async function createPlayerFigures(figure) {
   if (!figure) return {};
 
   const figureRun1 = new Image();
-  figureRun1.src = figure.normal;
+  figureRun1.src = figure.run1;
   figureRun1.dataset.js = "player";
   figureRun1.alt = "avatar";
 
   const figureRun2 = new Image();
-  figureRun2.src = figure.run;
+  figureRun2.src = figure.run2;
   figureRun2.dataset.js = "player";
   figureRun2.alt = "avatar";
 
@@ -99,12 +99,12 @@ async function handleRun() {
     player.append(figureJump);
     return;
   }
-  if (playerFigure.src.includes(figure.normal)) {
+  if (playerFigure.src.includes(figure.run1)) {
     document.querySelector('[data-js="player"]').remove();
     player.append(figureRun2);
     return;
   }
-  if (playerFigure.src.includes(figure.run)) {
+  if (playerFigure.src.includes(figure.run2)) {
     document.querySelector('[data-js="player"]').remove();
     player.append(figureRun1);
 
