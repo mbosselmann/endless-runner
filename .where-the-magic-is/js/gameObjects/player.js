@@ -139,6 +139,8 @@ function handleJump(delta) {
     isJumping = false;
     if (figureData && figureData.settings.rotate) {
       player.classList.remove("player--jump");
+    }
+    if (figureData) {
       document.querySelector('[data-js="player"]').remove();
       player.append(figureData.figureRun1);
     }
