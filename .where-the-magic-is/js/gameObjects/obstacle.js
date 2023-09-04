@@ -6,14 +6,16 @@ import {
 import { speedScale } from "../gameLogic/speedScale.js";
 
 const SPEED = 0.05;
-const OBSTACLE_INTERVAL_MIN = 1000;
+const OBSTACLE_INTERVAL_MIN = 1200;
 const OBSTACLE_INTERVAL_MAX = 2500;
+
+let nextObstacleTime;
+let isObstacleEnabled = false;
 
 const world = document.querySelector('[data-js="world"]');
 
-let nextObstacleTime;
-
 export function setupObstacle() {
+  isObstacleEnabled = true;
   nextObstacleTime = OBSTACLE_INTERVAL_MIN;
   document.querySelectorAll('[data-js="obstacle"]').forEach((obstacle) => {
     obstacle.remove();
@@ -21,26 +23,28 @@ export function setupObstacle() {
 }
 
 export function updateObstacle(delta) {
-  document.querySelectorAll('[data-js="obstacle"]').forEach((obstacle) => {
-    incrementCustomProperty(
-      obstacle,
-      "--left",
-      delta * speedScale * SPEED * -1
-    );
+  if (isObstacleEnabled) {
+    document.querySelectorAll('[data-js="obstacle"]').forEach((obstacle) => {
+      incrementCustomProperty(
+        obstacle,
+        "--left",
+        delta * speedScale * SPEED * -1
+      );
 
-    if (getCustomProperty(obstacle, "--left") <= -100) {
-      obstacle.remove();
+      if (getCustomProperty(obstacle, "--left") <= -100) {
+        obstacle.remove();
+      }
+    });
+
+    if (nextObstacleTime <= 0) {
+      createObstacle();
+      nextObstacleTime =
+        randomNumberBetween(OBSTACLE_INTERVAL_MIN, OBSTACLE_INTERVAL_MAX) /
+        speedScale;
     }
-  });
 
-  if (nextObstacleTime <= 0) {
-    createObstacle();
-    nextObstacleTime =
-      randomNumberBetween(OBSTACLE_INTERVAL_MIN, OBSTACLE_INTERVAL_MAX) /
-      speedScale;
+    nextObstacleTime -= delta;
   }
-
-  nextObstacleTime -= delta;
 }
 
 function createObstacle() {
@@ -62,4 +66,25 @@ export function getObstacleRectangles() {
       return obstacle.getBoundingClientRect();
     }
   );
+}
+
+export function resetIsObstacleEnabled() {
+  isObstacleEnabled = false;
+}
+
+export function positionObstacles() {
+  const obstacles = document.querySelectorAll('[data-js="obstacle"]');
+  const world = document.querySelector('[data-js="world"]');
+  const worldWidth = getCustomProperty(world, "width");
+
+  if (isObstacleEnabled) {
+    obstacles.forEach((obstacle) => {
+      const obstacleLeft = getCustomProperty(obstacle, "--left");
+      setCustomProperty(
+        obstacle,
+        "left",
+        (worldWidth / 100) * obstacleLeft + "px"
+      );
+    });
+  }
 }
