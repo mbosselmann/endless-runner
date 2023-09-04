@@ -7,8 +7,8 @@ export function checkCollision() {
   const smallerBoundingBox = {
     top: playerRectangle.top,
     bottom: playerRectangle.bottom,
-    left: playerRectangle.left + 20,
-    right: playerRectangle.right - 20,
+    left: playerRectangle.left + 30,
+    right: playerRectangle.right - 40,
   };
 
   return getObstacleRectangles().some((rectangle) =>
