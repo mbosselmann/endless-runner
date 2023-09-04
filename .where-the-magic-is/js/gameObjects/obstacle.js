@@ -11,12 +11,20 @@ const OBSTACLE_INTERVAL_MAX = 2500;
 
 let nextObstacleTime;
 let isObstacleEnabled = false;
+let obstacleImageSrc;
+let initialObstacle;
+let isInitialObstacleUsed = false;
 
 const world = document.querySelector('[data-js="world"]');
 
 export function setupObstacle() {
   isObstacleEnabled = true;
   nextObstacleTime = OBSTACLE_INTERVAL_MIN;
+  const obstacle = document.querySelector('[data-js="obstacle"]');
+  if (obstacle) {
+    obstacleImageSrc = obstacle.src;
+    initializeObstacleImage();
+  }
   document.querySelectorAll('[data-js="obstacle"]').forEach((obstacle) => {
     obstacle.remove();
   });
@@ -47,13 +55,27 @@ export function updateObstacle(delta) {
   }
 }
 
+function initializeObstacleImage() {
+  const obstacle = new Image();
+  obstacle.src = obstacleImageSrc;
+  initialObstacle = obstacle;
+}
+
 function createObstacle() {
-  const obstacle = document.createElement("img");
-  obstacle.dataset.js = "obstacle";
-  obstacle.classList.add("obstacle");
-  obstacle.src = "./assets/rock.png";
-  setCustomProperty(obstacle, "--left", 100);
-  world.append(obstacle);
+  if (isInitialObstacleUsed) {
+    const obstacle = new Image();
+    obstacle.src = obstacleImageSrc;
+    obstacle.dataset.js = "obstacle";
+    obstacle.classList.add("obstacle");
+    setCustomProperty(obstacle, "--left", 100);
+    world.append(obstacle);
+  } else {
+    initialObstacle.dataset.js = "obstacle";
+    initialObstacle.classList.add("obstacle");
+    setCustomProperty(initialObstacle, "--left", 100);
+    world.append(initialObstacle);
+    isInitialObstacleUsed = true;
+  }
 }
 
 function randomNumberBetween(min, max) {

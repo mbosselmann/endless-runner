@@ -14,19 +14,31 @@ let isJumping;
 let yVelocity;
 let intervalID;
 let playerBottom = 1;
+let figureData;
 
-const { figure } = await getSetupModule();
-const { figureRun1, figureRun2, figureJump, figureLose } =
-  await createPlayerFigures(figure);
+async function initialLoading() {
+  const { figure } = await getSetupModule();
+  const { figureRun1, figureRun2, figureJump, figureLose } =
+    await createPlayerFigures(figure);
+  figureData = {
+    settings: figure,
+    figureRun1,
+    figureRun2,
+    figureJump,
+    figureLose,
+  };
+}
+
+initialLoading();
 
 export async function setupPlayer() {
   isJumping = false;
   yVelocity = 0;
 
-  if (figure) {
+  if (figureData) {
     document.querySelector('[data-js="player"]').remove();
     player.classList.remove("player--jump");
-    player.append(figureRun1);
+    player.append(figureData.figureRun1);
     onRun();
   }
   setCustomProperty(player, "--bottom", playerBottom);
@@ -73,21 +85,28 @@ function onJump(event) {
   if (event.code !== "Space" || isJumping) return;
   yVelocity = JUMP_SPEED;
   isJumping = true;
-  if (figure && figure.rotate) player.classList.add("player--jump");
+  if (figureData && figureData.settings.rotate)
+    player.classList.add("player--jump");
 }
 
 function onRun() {
   const playerFigure = document.querySelector('[data-js="player"]');
 
-  if (playerFigure.src.includes(figure.lose)) return;
+  if (playerFigure.src.includes(figureData.settings.lose)) return;
 
   intervalID = setInterval(handleRun, 200);
 }
 
 async function handleRun() {
   const playerFigure = document.querySelector('[data-js="player"]');
+  const {
+    figure = figureData.settings,
+    figureRun1,
+    figureRun2,
+    figureJump,
+  } = figureData;
 
-  if (!figure) return;
+  if (!figureData) return;
 
   if (playerFigure.src.includes(figure.lose)) {
     clearInterval(intervalID);
@@ -118,14 +137,16 @@ function handleJump(delta) {
   if (getCustomProperty(player, "--bottom") <= playerBottom) {
     setCustomProperty(player, "--bottom", playerBottom);
     isJumping = false;
-    if (figure && figure.rotate) {
+    if (figureData && figureData.settings.rotate) {
       player.classList.remove("player--jump");
       document.querySelector('[data-js="player"]').remove();
-      player.append(figureRun1);
+      player.append(figureData.figureRun1);
     }
   }
   yVelocity -=
-    figure && figure.jumpToTheMoon ? 0.0005 * delta : GRAVITY * delta;
+    figureData && figureData.settings.jumpToTheMoon
+      ? 0.0005 * delta
+      : GRAVITY * delta;
 }
 
 export function getPlayerRectangle() {
@@ -133,8 +154,8 @@ export function getPlayerRectangle() {
 }
 
 export function setPlayerLose() {
-  if (!figure) return;
+  if (!figureData) return;
 
   document.querySelector('[data-js="player"]').remove();
-  player.append(figureLose);
+  player.append(figureData.figureLose);
 }
