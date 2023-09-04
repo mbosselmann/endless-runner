@@ -1,9 +1,9 @@
 // setup your figure for the game
 export const figure = {
-  run1: "/assets/gw_1.png",
-  run2: "/assets/gw_2.png",
-  jumping: "/assets/gj.png",
-  lose: "/assets/gh.png",
+  run1: "/assets/fw_1.png",
+  run2: "/assets/fw_2.png",
+  jumping: "/assets/fj.png",
+  lose: "/assets/fh.png",
   rotate: true,
   jumpToTheMoon: false,
 };
