@@ -1,22 +1,23 @@
 // setup your figure for the game
-// export const figure = {
-//   normal: "/assets/gw_1.png",
-//   run: "/assets/gw_2.png",
-//   jumping: "/assets/gj.png",
-//   lose: "/assets/gh.png",
-//   rotate: true,
-// };
+export const figure = {
+  run1: "/assets/gw_1.png",
+  run2: "/assets/gw_2.png",
+  jumping: "/assets/gj.png",
+  lose: "/assets/gh.png",
+  rotate: true,
+  jumpToTheMoon: false,
+};
 
 // decide for a theme: night or bw
-// export const theme = "";
+export const theme = "night";
 
 // decide for a custom color set
-// export const customColors = {
-//   textColor: "midnightblue",
-//   textBackgroundColor: "papayawhip",
-//   skyColor: "lightsalmon",
-//   gameBackgroundColor: "midnightblue",
-// };
+export const customColors = {
+  textColor: "midnightblue",
+  textBackgroundColor: "papayawhip",
+  skyColor: "lightsalmon",
+  gameBackgroundColor: "midnightblue",
+};
 
 // which text is displayed if you lose? -> change in HTML!?
 
