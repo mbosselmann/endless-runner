@@ -11,12 +11,15 @@ const OBSTACLE_INTERVAL_MAX = 2500;
 
 let nextObstacleTime;
 let isObstacleEnabled = false;
+let obstacleImageSrc;
 
 const world = document.querySelector('[data-js="world"]');
 
 export function setupObstacle() {
   isObstacleEnabled = true;
   nextObstacleTime = OBSTACLE_INTERVAL_MIN;
+  const obstacle = document.querySelector('[data-js="obstacle"]');
+  if (obstacle) obstacleImageSrc = obstacle.src;
   document.querySelectorAll('[data-js="obstacle"]').forEach((obstacle) => {
     obstacle.remove();
   });
@@ -48,10 +51,10 @@ export function updateObstacle(delta) {
 }
 
 function createObstacle() {
-  const obstacle = document.createElement("img");
+  const obstacle = new Image();
+  obstacle.src = obstacleImageSrc;
   obstacle.dataset.js = "obstacle";
   obstacle.classList.add("obstacle");
-  obstacle.src = "./assets/rock.png";
   setCustomProperty(obstacle, "--left", 100);
   world.append(obstacle);
 }
