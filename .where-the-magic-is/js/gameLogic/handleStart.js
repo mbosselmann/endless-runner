@@ -4,18 +4,24 @@ import { setupSpeedScale } from "./speedScale.js";
 import { updateGame, setupLastTime } from "./updateGame.js";
 import { setupGround } from "../gameObjects/ground.js";
 import { setupObstacle } from "../gameObjects/obstacle.js";
+import { resetIsObstacleEnabled } from "../gameObjects/obstacle.js";
 
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const text = document.querySelector('[data-js="text"]');
+const player = document.querySelector('[data-js="player"]');
+const obstacle = document.querySelector('[data-js="obstacle"]');
+const ground = document.querySelector('[data-js="ground"]');
+const score = document.querySelector('[data-js="score"]');
 
 export function handleStart() {
+  resetIsObstacleEnabled();
   setupLastTime();
   setupSpeedScale();
-  setupGround();
-  setupPlayer();
-  setupObstacle();
-  setupScore();
-  text.classList.add("hide");
-  startScreen.classList.add("hide");
+  if (ground) setupGround();
+  if (player) setupPlayer();
+  if (obstacle) setupObstacle();
+  if (score) setupScore();
+  if (text) text.classList.add("hide");
+  if (startScreen) startScreen.classList.add("hide");
   window.requestAnimationFrame(updateGame);
 }
