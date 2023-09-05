@@ -322,6 +322,14 @@ You can choose between the following colors:
 - `skyColor`: Change the background color of our `main` element (the **world**).
 - `gameBackgroundColor`: Change the background color of the frame around our world (only visible if you open the game in a new browser window).
 
+#### Results:
+
+As you can choose your own colors you should see a different game than we do. 🤩 The game looks like this if you use the colors that we add as an example:
+
+<p align="center">
+<img src="./assets/instructions/custom-colors.png" width="500" alt="Step 10: Custom colors">
+</p>
+
 ### 11 - Results
 
 Now we reached the end of our game. 🎉 We hope you had fun building your own endless runner game. 🤩 Your code inside of your `index.html` could look like this:
