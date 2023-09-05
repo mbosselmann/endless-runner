@@ -1,0 +1,18 @@
+.player {
+  --bottom: 1;
+  max-width: 128px;
+  position: absolute;
+  left: 100px;
+  bottom: calc(var(--bottom) * 1%);
+  filter: brightness(var(--brightness)) grayscale(var(--grayscale));
+}
+
+.player--jump {
+  animation: rotate 500ms linear;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(-360deg);
+  }
+}

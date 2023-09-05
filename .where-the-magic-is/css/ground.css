@@ -1,0 +1,10 @@
+.ground {
+  height: 30px;
+  --left: 0;
+  position: absolute;
+  width: 300%;
+  bottom: 0;
+  left: calc(var(--left) * 1%);
+  background: repeat-x url(../../assets/ground_grass.png);
+  filter: brightness(var(--brightness)) grayscale(var(--grayscale));
+}

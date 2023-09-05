@@ -1,0 +1,9 @@
+@import "./base.css";
+@import "./world.css";
+@import "./ground.css";
+@import "./player.css";
+@import "./obstacle.css";
+@import "./score.css";
+@import "./start-screen.css";
+@import "./text.css";
+@import "./themes.css";

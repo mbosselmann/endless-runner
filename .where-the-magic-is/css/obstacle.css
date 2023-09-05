@@ -1,0 +1,8 @@
+.obstacle {
+  --left: 120;
+  position: absolute;
+  left: calc(var(--left) * 1%);
+  width: 5rem;
+  bottom: 2%;
+  filter: brightness(var(--brightness));
+}

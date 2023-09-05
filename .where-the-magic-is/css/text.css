@@ -1,0 +1,11 @@
+.text {
+  --bottom: 87px;
+  --left: 200px;
+  position: absolute;
+  left: var(--left);
+  bottom: var(--bottom);
+  padding: 10px;
+  border-radius: 15px 10px 15px 0;
+  background-color: var(--bg-color);
+  filter: brightness(var(--brightness));
+}

@@ -1,0 +1,11 @@
+.start-screen {
+  margin: 0;
+  background-color: var(--bg-color);
+  border-radius: 15px;
+  padding: 1rem 1rem 0.7rem;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 7rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

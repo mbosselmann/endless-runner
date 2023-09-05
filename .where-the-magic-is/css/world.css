@@ -1,0 +1,20 @@
+.world {
+  overflow: hidden;
+  position: relative;
+  background-color: var(--sky);
+  height: 100vh;
+  max-height: 700px;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: 0 0 20px var(--sky);
+  filter: grayscale(var(--grayscale));
+  color: var(--color);
+}
+
+@media (min-width: 1000px) {
+  .world {
+    padding: 20px;
+    margin: 0 30px;
+    border-radius: 15px;
+  }
+}
