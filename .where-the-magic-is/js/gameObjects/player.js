@@ -16,7 +16,7 @@ let intervalID;
 let playerBottom = 1;
 let figureData;
 
-async function initialLoading() {
+async function initializePlayerFigures() {
   const { figure } = await getSetupModule();
   const { figureRun1, figureRun2, figureJump, figureLose } =
     await createPlayerFigures(figure);
@@ -29,16 +29,17 @@ async function initialLoading() {
   };
 }
 
-initialLoading();
+initializePlayerFigures();
 
-export async function setupPlayer() {
+export function setupPlayer() {
   isJumping = false;
   yVelocity = 0;
 
   if (figureData) {
+    const { figureRun1 } = figureData;
     document.querySelector('[data-js="player"]').remove();
     player.classList.remove("player--jump");
-    player.append(figureData.figureRun1);
+    player.append(figureRun1);
     onRun();
   }
   setCustomProperty(player, "--bottom", playerBottom);
@@ -113,20 +114,18 @@ async function handleRun() {
     return;
   }
 
+  playerFigure.remove();
+
   if (isJumping) {
-    document.querySelector('[data-js="player"]').remove();
     player.append(figureJump);
     return;
   }
   if (playerFigure.src.includes(figure.run1)) {
-    document.querySelector('[data-js="player"]').remove();
     player.append(figureRun2);
     return;
   }
   if (playerFigure.src.includes(figure.run2)) {
-    document.querySelector('[data-js="player"]').remove();
     player.append(figureRun1);
-
     return;
   }
 }
