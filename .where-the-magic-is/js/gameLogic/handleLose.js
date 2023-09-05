@@ -14,7 +14,7 @@ const world = document.querySelector('[data-js="world"]');
 export function handleLose() {
   if (text) {
     text.classList.remove("hide");
-    const player = document.querySelector('[data-js="player"]');
+    const player = document.querySelector('[data-js="player-image"]');
 
     const playerBottom = getCustomProperty(player, "--bottom");
     const playerLeft = getCustomProperty(player, "left");

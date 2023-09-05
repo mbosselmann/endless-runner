@@ -5,7 +5,7 @@ import {
   setCustomProperty,
 } from "../helper/updateCustomProperty.js";
 
-const player = document.querySelector('[data-js="image-container"]');
+const player = document.querySelector('[data-js="player"]');
 
 const JUMP_SPEED = 0.45;
 const GRAVITY = 0.0015;
@@ -18,15 +18,18 @@ let figureData;
 
 async function initializePlayerFigures() {
   const { figure } = await getSetupModule();
-  const { figureRun1, figureRun2, figureJump, figureLose } =
-    await createPlayerFigures(figure);
-  figureData = {
-    settings: figure,
-    figureRun1,
-    figureRun2,
-    figureJump,
-    figureLose,
-  };
+
+  if (figure) {
+    const { figureRun1, figureRun2, figureJump, figureLose } =
+      await createPlayerFigures(figure);
+    figureData = {
+      settings: figure,
+      figureRun1,
+      figureRun2,
+      figureJump,
+      figureLose,
+    };
+  }
 }
 
 initializePlayerFigures();
@@ -34,10 +37,10 @@ initializePlayerFigures();
 export function setupPlayer() {
   isJumping = false;
   yVelocity = 0;
-
+  console.log(figureData);
   if (figureData) {
     const { figureRun1 } = figureData;
-    document.querySelector('[data-js="player"]').remove();
+    document.querySelector('[data-js="player-image"]').remove();
     player.classList.remove("player--jump");
     player.append(figureRun1);
     onRun();
@@ -48,26 +51,26 @@ export function setupPlayer() {
 }
 
 async function createPlayerFigures(figure) {
-  if (!figure) return {};
+  if (!figure) return null;
 
   const figureRun1 = new Image();
   figureRun1.src = figure.run1;
-  figureRun1.dataset.js = "player";
+  figureRun1.dataset.js = "player-image";
   figureRun1.alt = "avatar";
 
   const figureRun2 = new Image();
   figureRun2.src = figure.run2;
-  figureRun2.dataset.js = "player";
+  figureRun2.dataset.js = "player-image";
   figureRun2.alt = "avatar";
 
   const figureJump = new Image();
   figureJump.src = figure.jumping;
-  figureJump.dataset.js = "player";
+  figureJump.dataset.js = "player-image";
   figureJump.alt = "avatar";
 
   const figureLose = new Image();
   figureLose.src = figure.lose;
-  figureLose.dataset.js = "player";
+  figureLose.dataset.js = "player-image";
   figureLose.alt = "avatar";
 
   return {
@@ -91,7 +94,7 @@ function onJump(event) {
 }
 
 function onRun() {
-  const playerFigure = document.querySelector('[data-js="player"]');
+  const playerFigure = document.querySelector('[data-js="player-image"]');
 
   if (playerFigure.src.includes(figureData.settings.lose)) return;
 
@@ -99,7 +102,7 @@ function onRun() {
 }
 
 async function handleRun() {
-  const playerFigure = document.querySelector('[data-js="player"]');
+  const playerFigure = document.querySelector('[data-js="player-image"]');
   const {
     figure = figureData.settings,
     figureRun1,
@@ -140,7 +143,7 @@ function handleJump(delta) {
       player.classList.remove("player--jump");
     }
     if (figureData) {
-      document.querySelector('[data-js="player"]').remove();
+      document.querySelector('[data-js="player-image"]').remove();
       player.append(figureData.figureRun1);
     }
   }
@@ -157,6 +160,6 @@ export function getPlayerRectangle() {
 export function setPlayerLose() {
   if (!figureData) return;
 
-  document.querySelector('[data-js="player"]').remove();
+  document.querySelector('[data-js="player-image"]').remove();
   player.append(figureData.figureLose);
 }

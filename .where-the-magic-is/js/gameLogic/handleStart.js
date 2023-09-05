@@ -8,7 +8,7 @@ import { resetIsObstacleEnabled } from "../gameObjects/obstacle.js";
 
 const startScreen = document.querySelector('[data-js="start-screen"]');
 const text = document.querySelector('[data-js="text"]');
-const player = document.querySelector('[data-js="player"]');
+const player = document.querySelector('[data-js="player-image"]');
 const obstacle = document.querySelector('[data-js="obstacle"]');
 const ground = document.querySelector('[data-js="ground"]');
 const score = document.querySelector('[data-js="score"]');

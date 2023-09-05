@@ -13,7 +13,7 @@ export function setupLastTime() {
 }
 
 export function updateGame(time) {
-  const player = document.querySelector('[data-js="player"]');
+  const player = document.querySelector('[data-js="player-image"]');
   const ground = document.querySelector('[data-js="ground"]');
   const score = document.querySelector('[data-js="score"]');
 
