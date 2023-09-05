@@ -10,24 +10,24 @@
   </head>
   <body>
     <main class="world" data-js="world">
-      <p class="score">No damage for: <span data-js="score">0</span> seconds</p>
-      <p class="start-screen" data-js="start-screen">Press Any Key To Start</p>
       <div class="ground" data-js="ground"></div>
       <div class="ground" data-js="ground"></div>
-      <span class="text hide" data-js="text">Ouch!</span>
       <div class="player" data-js="player">
         <img
           data-js="player-image"
-          src="./assets/sw_1.png"
+          src="./assets/gw_1.png"
           alt="player character"
         />
       </div>
       <img
-        class="obstacle"
-        data-js="obstacle"
-        src="./assets/black_hole.png"
+        src="./assets/rock.png"
         alt="obstacle"
+        data-js="obstacle"
+        class="obstacle"
       />
+      <p class="start-screen" data-js="start-screen">Press any key to start</p>
+      <p class="score">No damage for: <span data-js="score">0</span> seconds</p>
+      <span class="text hide" data-js="text">Ouch!</span>
     </main>
   </body>
 </html>
