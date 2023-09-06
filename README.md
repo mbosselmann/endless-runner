@@ -11,34 +11,34 @@ An **endless runner game** is a type of video game where the player character is
 - The player can **start the game** by pressing any key.
 - The player can **control the avatar** by pressing the `space` key to jump.
 - The **game is over** when the player hits an obstacle.
-- The player can **restart the game** by pressing the any key.
+- The player can **restart the game** by pressing any key.
 
 ### Project Setup
 
-We have already created the project for you and used **HTML**, **CSS** and **JavaScript** to make the game work.
+We have set up the project for you and used **HTML**, **CSS** and **JavaScript** to create the game.
 
 #### What is HTML?
 
-**HTML (Hyper Text Markup Language)** is used to express text in a structured way. **HTML tags** indicate what kind of element is displayed on the website.
+**HTML (Hyper Text Markup Language)** is used to express text in a structured way. **HTML tags** indicate what kind of element is displayed on a website.
 
 #### What is CSS?
 
-**CSS (Cascading Style Sheets)** is used to style the HTML elements. We will use CSS to make our game look nice. Most of the stylings are already done for you, but you can change some of the colors of the game if you want to. We will show you how to do this later and we will do this by using JavaScript. 🤓
+**CSS (Cascading Style Sheets)** is used to style HTML elements. We will use CSS to make our game look nice. Most of the stylings are already implemented for you, but you can change some of the colors of the game if you want to. We will show you how to do this later and we will do this by using JavaScript. 🤓
 
 #### What is JavaScript?
 
 **JavaScript** is used to make our game interactive. Some examples:
 
 - We use JavaScript to add the player and the obstacles to our game.
-- We use JavaScript to make the player jump and to make the obstacles and the grounds move.
+- We use JavaScript to make the player jump and to make the obstacles and the ground move.
 - We also use JavaScript to make the game more challenging by increasing the speed of the game over time.
-- And we use JavaScript to update the score of the player.
+- And we use JavaScript to update the player score.
 
-These functionalities are already implemented for you, but we need to write the correct HTML to make the JavaScript code work. And we also need to decide on some configurations for our game that we also need to write in JavaScript.
+These features are already implemented for you, but we need to write the correct HTML to make the JavaScript code work. We also need to decide on some configurations for our game that we also need to write in JavaScript.
 
 ## Help to Build an Endless Runner Game
 
-Almost everything has been done for you: The game setup and the game logic is implemented and also the general stylings are finished. **But** we need your help with writing the correct structure for our game and we also need to decide on some configurations for our game. _Let us begin!_ 🚀
+Almost everything has been taken care of for you: The game setup and the game logic is implemented and the general stylings are finished. **But** we need your help with writing the correct structure for our game and we also need to decide on some configurations for our game. _Let us begin!_ 🚀
 
 **Note:** As we have created much of the game logic and styling beforehand, we need to be precise with the code we are writing. Please follow our instructions carefully and do not change the existing code (unless we say to do so). If you have any questions, please ask your coaches. **But** feel free to adjust the code **after** we have finished the game. 🤓
 
@@ -54,7 +54,7 @@ To add the world to our project we write **HTML code**. We need to create a `mai
 <main class="world" data-js="world"></main>
 ```
 
-We add the correct attributes to add some more information for each element in order to work properly. This information is specified via **attributes**, which are added to the opening tag of an element. Attributes are made up of two parts: a **name** and a **value**, separated by an equals sign (`=`). The value should be wrapped in quotes (`""`). In our case we use the `class` and the `data-js` attribute:
+We include the correct attributes to add some more information to each element in order for it to work properly. This information is specified via **attributes**, which are added to the opening tag of an element. Attributes are made up of two parts: a **name** and a **value**, separated by an equals sign (`=`). The value should be wrapped in quotes (`""`). In our case we use the `class` and the `data-js` attribute:
 
 - The `class` attribute is used to specify one or more class names for an element. We will use this attribute to style elements with CSS. The value depends on the element. For the `main` element we decided to work with the class name `world`.
 - The `data-js` attribute is used to specify the JavaScript code for the element. We will use this attribute to select elements in our JavaScript code. For our `main` element we decided to work with the value `world`.
@@ -63,9 +63,9 @@ We add the correct attributes to add some more information for each element in o
 
 **Note:** After saving the file, you should see a blue box. This is the world we just created. 🌍
 
-### 2 - Add the Ground(s)
+### 2 - Add the Ground
 
-Now that we have created the world, we want to add the ground(s) to our game. The ground is the place where the player is running on. We need to add two grounds to our game. We do this by writing **HTML code**. We need to create two `div` elements and add two attributes to each element: `class` and `data-js`:
+Now that we have created the world, we want to add the ground to our game, so that our player can have something to endlessly run on. We need to add two grounds to our game, otherwise we couldn't make it loop nicely. We do this by writing **HTML code**. We need to create two `div` elements and add two attributes to each element: `class` and `data-js`:
 
 ```html
 <main class="world" data-js="world">
@@ -199,7 +199,7 @@ It is up to you to decide which obstacle you want to use. We have added some opt
 <img src="./assets/instructions/obstacle-options.png" width="420" alt="Step 5: Obstacle Options">
 </p>
 
-Congratulations! 🎉 With the implementation of the obstacle we have finished the necessary structure of our game. 🙌 But maybe you want to add some more functionalities to your game and change the theme or the colors of your game. We will show you how to do this next! 🤓
+Congratulations! 🎉 With the implementation of the obstacle we have finished the structure of our game. 🙌 But maybe you want to add some more functionalities to your game and change the theme or the colors? We will show you how to do this next! 🤓
 
 #### Result:
 
@@ -232,7 +232,7 @@ When loading the game we see the text `Press any key to start`. When we press an
 
 ### 7 - Add the Score
 
-We think that a really cool feature of our game is to show the score of the player. We want to show the score in seconds.
+We think that a really cool feature of our game is to show the score of the player. We want to show the score based on seconds passed since the start of the game.
 
 ```html
 <p class="score">No damage for: <span data-js="score">0</span> seconds</p>
